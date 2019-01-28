@@ -1,0 +1,62 @@
+{% extends "common/other_base.html" %}
+{% block header %}
+    <link rel="stylesheet" href="{% static 'css/index.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/coursepage.min.css' %}">
+    <script src="{% static 'art_template/template-web.js' %}"></script>
+    <script src="{% static 'js/course_live.min.js' %}"></script>
+    <script type="text/html" id="test-template">
+    {% verbatim %}
+    {{each testdata val index  }}
+    <li class="course-image">
+            <a href="#">
+                <div class="thumbnail-group">
+                   <img src="{{ val.cover }}" alt="">
+                </div>
+                <div class="course-info">
+                    <p class="title"> {{ val.title }}</p>
+                    <p class="author">{{ val.teacher.name }}</p>
+                    <p class="priceinfo">
+                        {{ if val.price == 0.0 }}
+                        <span class="free">免费</span>
+                        {{ else  }}
+                         <span class="not-free">{{ val.price }}</span>
+                        {{ /if }}
+                    </p>
+                </div>
+            </a>
+    </li>
+    {{ /each }}
+    {% endverbatim %}
+    </script>
+{% endblock %}
+{% block headercontent %}
+    <ul class="course-categpry">
+    {% for cat in category %}
+     <li data-catid="{{ cat.id }}" class="liclass"><a href="javascript:void (0)">{{ cat.category }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+{% block content %}
+    <ul class="course-group">
+        {% for course in courses %}
+        <li class="course-image">
+            <a href="#">
+                <div class="thumbnail-group">
+                   <img src="{{ course.cover }}" alt="">
+                </div>
+                <div class="course-info">
+                    <p class="title"> {{ course.title }}</p>
+                    <p class="author">{{ course.teacher.name }}</p>
+                    <p class="priceinfo">
+                        {% if course.price == 0.0 %}
+                        <span class="free">免费</span>
+                        {% else %}
+                         <span class="not-free">{{ course.price }}</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

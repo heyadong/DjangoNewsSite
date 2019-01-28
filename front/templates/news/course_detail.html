@@ -1,0 +1,81 @@
+{% extends "common/other_base.html" %}
+{% block header %}
+   <link rel="stylesheet" href="{% static 'css/coursedetail.min.css' %}">
+{% endblock %}
+{% block content %}
+   <div class="course-wrapper">
+        <div class="course-info">
+            <p class="course-title">实体服务业的经营分享</p>
+            <div class="price-group">
+                <div class="share">
+                <i>分享至：</i>
+                <a class="weixin"></a>
+                <a class="weibo"></a>
+            </div>
+                <div class="buy-group">
+                <span class="price">45.5</span>
+                <button class="buy-btn">立即购买</button>
+            </div>
+            </div>
+        </div>
+        <!-- 播放器 -->
+        <div class="player"></div>
+        <!-- playerend -->
+        <div class="other-info">
+            <div class="items-group">
+                <div class="info-group">
+                    <p class="title">课程讲师</p>
+                    <div class="tcr-info">
+                        <div class="avater">
+                            <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3175633703,3855171020&fm=27&gp=0.jpg">
+                        </div>
+                        <div class="more-info">
+                            <p class="tcr-name">何亚东</p>
+                            <p class="tcr-work">Python全栈开发</p>
+                        </div>
+                    </div>
+                    <p class="t-info">
+                        连续创业者， 大学期间开始创业，经历过电商， 在线旅游市场等创业热潮，
+                        累计获得数千万美金风险投资，目前主要从事健身房或瑜伽馆的创业，旗下有100多个瑜伽馆，分布在全国数十个城市，对于如何管理线下门店，如何通过合伙模式最优化线下门店效率，提高门店业绩，有独特的见解。
+                    </p>
+                </div>
+                <div class="info-group">
+                    <p class="title">课程简介</p>
+                    <p class="t-info">
+                        &nbsp;&nbsp;连续创业者， 大学期间开始创业，经历过电商， 在线旅游市场等创业热潮，
+                        累计获得数千万美金风险投资，目前主要从事健身房或瑜伽馆的创业，旗下有100多个瑜伽馆，分布在全国数十个城市，对于如何管理线下门店，如何通过合伙模式最优化线下门店效率，提高门店业绩，有独特的见解。
+                    </p>
+                </div>
+            </div>
+            <div class="right-sidebar">
+                <div class="recommend-group">
+                    <p class="title">推荐课程</p>
+                    <ul class="course-list">
+                        <li class="recommend-course">
+                              <a href="#">
+                                  <div class="left-info" >
+                                    <div class="video-title">什么样的人适合创业</div>
+                                    <div class="video-author">何亚东/python开发工程师</div>
+                                  </div>
+                                  <div class="right-info">
+                                    <img src="https://static-image.xfz.cn/1513753715_100.jpg-course.list.small">
+                                  </div>
+                              </a>
+                          </li>
+                        <li class="recommend-course">
+                              <a href="#">
+                                  <div class="left-info" >
+                                    <div class="video-title">什么样的人适合创业</div>
+                                    <div class="video-author">何亚东/python开发工程师</div>
+                                  </div>
+                                  <div class="right-info">
+                                    <img src="https://static-image.xfz.cn/1513753715_100.jpg-course.list.small">
+                                  </div>
+                              </a>
+                          </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

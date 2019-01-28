@@ -1,0 +1,70 @@
+{% extends "common/cms_base.html" %}
+{% block header %}
+    <script src="{% static "js/newsatag.min.js" %}"></script>
+{% endblock %}
+{% block bar-tiltle %}
+新闻管理
+{% endblock %}
+{% block second-title %}
+新闻分类
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header">
+                <form action="{% url "cms:category" %}" method="post">
+
+                  <div class="input-group">
+                    <input class="form-control" type="text" name="tag">
+                    <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary">添加标签</button>
+                    </span>
+                  </div>
+                    {% csrf_token %}
+                </form>
+            </div>
+            <!-- 提示框 -->
+                <div class="alert-warning alert-dismissible fade in" role="alert">
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">×</span></button>
+                </div>
+            <!-- 提示框end -->
+            <div class="box-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>
+                            分类名称
+                        </th>
+                        <th>
+                            新闻数量
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for tag in tags %}
+                    <tr data-tagid="{{ tag.id }}" data-tagname="{{ tag.name }}">
+                        <td>
+                           {{ tag.name }}
+                        </td>
+                        <td>
+                            20
+                        </td>
+                        <td>
+                            <button class="btn btn-warning btn-xs edit-btn">编辑</button>
+                            <button class="btn btn-danger btn-xs del-btn" >删除</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

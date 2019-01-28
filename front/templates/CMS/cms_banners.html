@@ -1,0 +1,112 @@
+{% extends 'common/cms_base.html' %}
+{% block header %}
+    <style>
+    .c-header{
+        margin: 10px 0 10px 10px;
+    }
+    .c-button{
+        float: left;
+    }
+    .tips{
+        float: left;
+        padding-left: 50px;
+    }
+    .right-content{
+        float: right;
+        width: 400px;
+    }
+    .left-content{
+        float: left;
+        width: 256px;
+        height: 89px;
+    }
+    .left-content .thumbnail{
+        width: 100%;
+        height: 100%;
+    }
+    .box-c{
+        width: 900px;
+        margin: 20px 0;
+    }
+    </style>
+    <script src="{% static "art_template/template-web.js" %}"></script>
+    <script type="text/html" id="card-box">
+    <div class="box box-primary box-c">
+                <div class="box-header">
+                    <p class="left-header" style="float: left">
+                        优先级：1
+                    </p>
+                    <button class="btn btn-default btn-xs del-btn" style="float:right;">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div>
+                <div class="box-body">
+                    <div class="left-content">
+                        <img class="thumbnail" src="https://static-image.xfz.cn/1538129671_255.png" alt="">
+                        <input type="file" class="thumbnailinput" style="display: none" name="thumbnail">
+                    </div>
+                    <div class="right-content">
+                        <div class="form-group">
+                            <input class="form-control" name="position" placeholder="优先级">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" name="link_to" placeholder="跳转链接">
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button class="btn btn-primary pull-right commit-btn">
+                        添加轮播图
+                    </button>
+                </div>
+            </div>
+    </script>
+    <script src="{% static "js/banners.min.js"  %}"></script>
+{% endblock %}
+{% block bar-tiltle %}轮播图管理{% endblock %}
+{% block second-title %}轮播图新增{% endblock %}
+{% block content %}
+    <div class="c-header">
+                <div class="c-button">
+                    <button id="box-add" class="btn btn-primary"><i class="fa fa-plus"></i> 添加轮播图</button>
+                </div>
+                <ul class="tips">
+                    <li>新增轮播图可以添加轮播图片</li>
+                    <li>图片仅支持.jpg、.bmp格式的图片</li>
+                </ul>
+            </div>
+    <div class="row">
+        <div class="col-md-12" id="content-box">
+            {% for banner in banners %}
+            <div data-boxid="{{ banner.pk }}" class="box box-primary box-c">
+                <div class="box-header">
+                    <p class="left-header" style="float: left">
+                        优先级：{{ banner.position }}
+                    </p>
+                    <button class="btn btn-default btn-xs del-btn" style="float:right;">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div>
+                <div class="box-body">
+                    <div class="left-content">
+                        <img class="thumbnail" src="{{ banner.bannersimg }}" alt="">
+                    </div>
+                    <div class="right-content">
+                        <div class="form-group">
+                            <input class="form-control" name="position" value="{{ banner.position }}">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" name="link_to" value="{{ banner.link_to }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button class="btn btn-primary pull-right">
+                        添加
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

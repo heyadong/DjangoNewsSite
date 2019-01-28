@@ -1,0 +1,166 @@
+{% extends "common/cms_base.html" %}
+{% block header %}
+    <style>
+        .header-query{
+            margin-bottom: 20px;
+        }
+        .inp-width{
+            margin: 0 0 0 10px;
+        }
+
+    </style>
+    <link rel="stylesheet" href="{% static "cms_style/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" %}">
+    <script src="{% static "cms_style/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" %}"></script>
+    <script>
+    $(".datepicker").datetimepicker({
+        format: "dd MM yyyy - hh:ii"
+    })
+    </script>
+{% endblock %}
+{% block bar-tiltle %}
+新闻管理
+{% endblock %}
+{% block second-title %}
+新闻查询
+{% endblock %}
+{% block content %}
+<div class="header-query">
+<form action="{% url "cms:newsquery" %}" method="get">
+    <div class="form-inline">
+        <div class="form-group inp-width">
+            <label>
+                开始时间:
+            </label>
+            <input type="text" name="s_time" class="form-control datepicker" style="width: 150px;" readonly>
+        </div>
+        --
+        <div class="form-group inp-width">
+            <label>
+                结束时间:
+            </label>
+            <input type="text" name="e_time" class="form-control datepicker" style="width: 150px;"  readonly>
+        </div>
+        <div class="form-group inp-width">
+            <label>
+                新闻分类:
+            </label>
+            <select class="form-control" name="tag">
+                <option value="0">全部</option>
+                {% for tag in tags %}
+                 {% if tag_id == tag.id and tag_id != 0 %}
+                    <option value="{{ tag.id }}" selected>{{ tag.name }}</option>
+                 {% else %}
+                    <option value="{{ tag.id }}" >{{ tag.name }}</option>
+                 {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group inp-width">
+            <label>
+                作者：
+            </label>
+            <input type="text"  name="author" class="form-control" >
+        </div>
+        <div class="form-group inp-width">
+            <label>
+                标题:
+            </label>
+            <input type="text" name="title" class="form-control" id="">
+        </div>
+        <div class="form-group inp-width" style="float: right">
+            <button class="btn btn-primary ">搜索</button>
+        </div>
+    </div>
+</form>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+           <table class="table table-hover table-bordered">
+           <thead>
+           <tr>
+               <th>序号</th>
+               <th>新闻标题</th>
+               <th>分类</th>
+               <th>作者</th>
+               <th>发布时间</th>
+               <th>操作</th>
+           </tr>
+           </thead>
+           <tbody>
+           {% for new in page_obj.object_list %}
+           <tr>
+               <td>{{ new.pk }}</td>
+               <td>{{ new.title }}</td>
+               <td>{{ new.tag.name }}</td>
+               <td>{{ new.author.username }}</td>
+               <td>
+                   {{ new.pub_time }}
+               </td>
+               <td>
+                   <button class="btn btn-warning btn-sm">编辑</button>
+                   <button class="btn btn-danger btn-sm">删除</button>
+               </td>
+           </tr>
+           {% endfor %}
+           </tbody>
+           </table>
+        </div>
+        <div>
+            <nav aria-label="Page navigation" style="overflow: hidden">
+                <ul class="pagination center-block">
+                   {% if page_obj.has_previous %}
+                    <li class="active">
+                        <a href="{% url "cms:newsquery" %}?p={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% else %}
+                       <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if left_has_more %}
+                        <li>
+                            <a href="{% url "cms:newsquery" %}?p=1" aria-label="Previous">
+                                1
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url "cms:newsquery" %}?p=1" aria-label="Previous">
+                                ...
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for lp in left_pages %}
+                        <li><a href="{% url "cms:newsquery" %}?p={{ lp }}">{{ lp }}</a></li>
+                    {% endfor %}
+                    {% for rp in right_pages %}
+                        <li><a href="{% url "cms:newsquery" %}?p={{ rp }}">{{ rp }}</a></li>
+                    {% endfor %}
+                    {% if right_has_more %}
+                        <li>
+                            <a href="{% url "cms:newsquery" %}?p={{ page_obj.next_page_number }}" aria-label="Previous">
+                                ...
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url "cms:newsquery" %}?p={{ num_pages }}" aria-label="Previous">
+                                {{ num_pages }}
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}

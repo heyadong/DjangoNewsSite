@@ -1,0 +1,75 @@
+{% extends "common/cms_base.html" %}
+{% block header %}
+   <style>
+    .ctn-header{
+        margin-bottom: 20px;
+    }
+   </style>
+{% endblock %}
+{% block bar-tiltle %}
+课程管理
+{% endblock %}
+{% block second-title %}
+课程查询
+{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+      <div class="ctn-header">
+          <form action="#" class="form-inline">
+              <div class="form-group">
+                  <label for="course-title">
+                      标题
+                  </label>
+                  <input id="course-title" name="course-title" type="text" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label for="course-title">
+                      讲师
+                  </label>
+                  <input id="course-teacher" name="course-teacher" type="text" class="form-control inputWidth">
+              </div>
+              <div class="form-group">
+                  <input type="button" class="form-control btn-primary pull-right" value="查询">
+              </div>
+          </form>
+      </div>
+      <div class="box box-primary">
+          <div class="box-body">
+          <table class="table table-bordered">
+              <thead>
+              <tr>
+                  <th>序号</th>
+                  <th>标题</th>
+                  <th>讲师</th>
+                  <th>课程分类</th>
+                  <th>课程价格</th>
+                  <th>课程时长</th>
+                  <th>课程简介</th>
+
+                  <th>操做</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for course in courses_list %}
+              <tr>
+                 <td>{{ course.id }}</td>
+                 <td>{{ course.title }}</td>
+                 <td>{{ course.teacher.name}}</td>
+                  <td>{{ course.category.category }}</td>
+                 <td>{{ course.price }}</td>
+                  <td>{{ course.times }}</td>
+                  <td>{{ course.abstract }}</td>
+                  <td>
+                      <button data-courseid="1" class="btn btn-primary btn-sm" id="course-edit">编辑</button>
+                      <button class="btn btn-danger btn-sm" id="course-delete">删除</button>
+                  </td>
+              </tr>
+              {% endfor %}
+              </tbody>
+          </table>
+      </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

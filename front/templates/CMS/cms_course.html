@@ -1,0 +1,75 @@
+{% extends "common/cms_base.html" %}
+{% block bar-tiltle %}
+课程管理
+{% endblock %}
+{% block second-title %}
+    课程新增
+{% endblock %}
+{% block header %}
+    <script src="{% static "ueditor/ueditor.config.js" %}"></script>
+    <script src="{% static "ueditor/ueditor.all.min.js" %}"></script>
+    <script src="{% static "js/course.min.js" %}"></script>
+{% endblock %}
+{% block content %}
+<div class="row ">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <form action="#" >
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="course_title">课程标题</label>
+                            <input type="text" id="course_title" name="course_title" class="form-control" placeholder="课程标题">
+                        </div>
+                        <div class="form-group">
+                            <label for="course_category">课程分类</label>
+                            <select name="category" id="course_category" class="form-control">
+                                {% for category in categorys  %}
+                                <option value="{{ category.id }}">{{ category.category }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="course_teacher">课程讲师</label>
+                            <select name="teacher" id="course_teacher" class="form-control">
+                                {% for teacher in teachers %}
+                                <option value="{{ teacher.id }}">{{ teacher.name }}</option>
+                                {% endfor %}
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="course_link">课程地址</label>
+                            <input id="course_link" name="course_link" type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="course_time">时长</label>
+                            <input type="text" id="course_time" name="course_time" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="course_image">课程封面</label>
+                            <div class="input-group">
+                                <input type="text" id="course_image" name="course_image" class="form-control">
+                                <span class="input-group-btn">
+                                    <label class="btn btn-default btn-file">
+                                        上传图片<input hidden type="file" class="form-control" id="upload-file">
+                                    </label>
+                                </span>  <!-- 文件上传标签的更改 -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="course_desc">价格</label>
+                            <input type="text" id="course_price" name="course_price" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="course_desc">课程简介</label>
+                            <script id="course_desc" ></script>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button id="course-confirm-btn" type="submit" class="btn btn-primary pull-right">发布新闻</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

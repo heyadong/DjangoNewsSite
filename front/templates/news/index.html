@@ -1,0 +1,143 @@
+{% extends 'common/front_base.html' %}
+{% block header %}
+    <script src="{% static 'art_template/template-web.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/index.min.css' %}">
+
+    <script type="text/html" id="art-template">
+
+    {% verbatim %}
+    {{each articles article index}}
+     <li>
+         <div class="thumbnial-group"><a><img src="https://heyadong-1255763516.cos.ap-chengdu.myqcloud.com/6H%E6%B6%A1%E8%BD%AE%E5%A2%9E%E5%8E%8B%E5%99%A8%E7%B4%A2%E8%B5%94%E7%9C%81%E4%BB%BD%E5%88%86%E5%B8%83.png?q-sign-algorithm=sha1&q-ak=AKIDCtfKE9L29CxL2p2MFA1R0s7DpzE4zCHt&q-sign-time=1538719877;1538721677&q-key-time=1538719877;1538721677&q-header-list=&q-url-param-list=&q-signature=100c566a1464897cf67bba4d780a3ded12ba79b6&x-cos-security-token=a9ca22d7d169bad078cf3039f4861d1c23bdf97310001&response-content-disposition=attachment"></a></div>
+         <div class="news-info">
+             <p class="title"><a href="/news/{{ article.id }}">{{ article.title }}</a></p>
+             <p class="info">{{ article.description }}</p>
+             <div class="more" >
+                 <span class="category">{{ article.tag.name }}</span>
+                 <span class="pub-time">{{ article.pub_time }}</span>
+                 <span class="pub-author">{{ article.author.username}}</span>
+             </div>
+         </div>
+     </li>
+    {{ /each }}
+    {% endverbatim %}
+</script>
+{% endblock %}
+{% block content %}
+    <div class="wrapper">
+        <div class="news-wrapper">
+            <div class="banner-group" id="banner-group">
+                <ul class="banner-ul" id="bannerUI">
+                    {% for banner in banners %}
+                    <li>
+                        <a href="#"><img src="{{ banner.bannersimg }}"></a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <span class="arrow left-arrow" id="left-arrow">《</span>
+                <span class="arrow right-arrow" id="right-arrow">》</span>
+                <ul class="dots" id="dots">
+                </ul>
+            </div>
+            <div class="news-list">
+                <ul class="list-tab">
+                    <li data-tagid="0" class="active"><a href="javascript:void(0)">最新资讯</a></li>
+                    {% for tag in tags %}
+                    <li data-tagid="{{ tag.id }}"><a href="javascript:void(0)">{{ tag.name }}</a></li>
+                    {% endfor %}
+                </ul>
+                <ul class="news-group">
+                    <li>
+                        <div class="thumbnial-group"><a><img src="https://static-image.xfz.cn/1531497424_561.jpeg-website.news.list"></a></div>
+                        <div class="news-info">
+                            <p class="title"><a href="#">【不凡早报】京东物流：十年内物流成本已降低50%；乐视网：上半年预计亏损11.05亿元-11.1亿元</a></p>
+                            <p class="info">乐视网公告称，上半年预计亏损11.05亿元-11.1亿元，上年同期亏损6.37亿元；如经审计后公司2018年全年净资产为负，公司存在股票被暂停上市的风险。</p>
+                            <div class="more" >
+                            <span class="category">热点</span>
+                            <span class="pub-time">2018-07-14</span>
+                            <span class="pub-author">何亚东</span>
+                            </div>
+                        </div>
+                    </li>
+                    {% for article in articles %}
+                    <li>
+                        <div class="thumbnial-group"><a><img src="https://static-image.xfz.cn/1531497424_561.jpeg-website.news.list"></a></div>
+                        <div class="news-info">
+                            <p class="title"><a href="{% url "news:news_detail" news_id=article.pk%}">{{ article.title }}</a></p>
+                            <p class="info">{{ article.description }}</p>
+                            <div class="more" >
+                            <span class="category">{{ article.tag.name }}</span>
+                            <span class="pub-time">{{ article.pub_time }}</span>
+                            <span class="pub-author">{{ article.author.username }}</span>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="loadmore">
+                <button class="morebutton" id="load-more">加载更多</button>
+            </div>
+        </div>
+        <div class="siderbar-wrapper">
+            <div class="commercial">
+                <div class="title-group">
+                    <span class="title">小饭桌课堂</span>
+                    <span class="more">更多</span>
+                </div>
+                <div class="ad-image">
+                <a href="#">
+                    <img src="https://static-image.xfz.cn/1529560387_820.jpg-website.active.list">
+                </a>
+                </div>
+            </div>
+            <div class="foucs-group">
+                <div class="title-group">
+                    <span class="title">联系我们</span>
+                    <span class="more">更多</span>
+                </div>
+                <div class="content-group">
+                    <ul>
+                        <li class="zhihu"><a href="#">知乎</a></li>
+                        <li class="weibo"><a href="#">微博</a></li>
+                        <li class="toutiao"><a href="#">今日头条</a></li>
+                    </ul>
+                </div>
+                <div class="qrcode">
+                    <div class="qrcode-image"></div>
+                    <span class="qrcode-info">扫码关注不凡商业微信公众平台bufanbiz</span>
+                </div>
+            </div>
+            <div class="hotnews">
+                <div class="title-group">热门推荐</div>
+                <ul class="hotnews-warpper">
+                     <li>
+                         <div class="left-group">
+                             <p class="red-content">王健林卖掉进军海外的首个项目：17亿售出伦敦ON...</p>
+                            <div class="more">
+                                <span class="category">深度报道</span>
+                                <span class="time">1小时前</span>
+                            </div>
+                         </div>
+                         <div class="rights-group">
+                            <img src="https://static-image.xfz.cn/1531881965_705.jpg-website.news.list">
+                         </div>
+                    </li>
+                    <li>
+                         <div class="left-group">
+                             <p class="red-content">王健林卖掉进军海外的首个项目：17亿售出伦敦ON...</p>
+                            <div class="more">
+                                <span class="category">深度报道</span>
+                                <span class="time">1小时前</span>
+                            </div>
+                         </div>
+                         <div class="rights-group">
+                            <img src="https://static-image.xfz.cn/1531881965_705.jpg-website.news.list">
+                         </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}{% endblock %}

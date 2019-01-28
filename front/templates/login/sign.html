@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../dist/js/jquery-3.3.1.min.js"></script>
+    <script src="../../dist/js/auth.min.js"></script>
+    <link rel="stylesheet" href="../../dist/css/auth.min.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_797244_o4dztv0vtua.css">
+</head>
+<style>
+    @font-face {
+  font-family: 'iconfont';  /* project id 797244 */
+  src: url('https://at.alicdn.com/t/font_797244_o4dztv0vtua.eot');
+  src: url('https://at.alicdn.com/t/font_797244_o4dztv0vtua.eot?#iefix') format('embedded-opentype'),
+  url('https://at.alicdn.com/t/font_797244_o4dztv0vtua.woff') format('woff'),
+  url('https://at.alicdn.com/t/font_797244_o4dztv0vtua.ttf') format('truetype'),
+  url('https://at.alicdn.com/t/font_797244_o4dztv0vtua.svg#iconfont') format('svg');
+}
+</style>
+<body>
+<button id="login-btn">登陆/注册</button>
+<div class="auth-mask">
+    <div class="auth-group">
+        <div class="sign-group">
+            <div class="sign-in auth-content">
+                <div class="icon">
+                    <span class="iconfont"> &#xe63a;</span>
+                </div>
+                <div class="header-group">
+                    <div class="header-content">
+                        <div class="title">登陆</div>
+                        <div class="title-b">立即注册</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="请输入用户名/邮箱/手机号" name="telephone">
+                    </div>
+                    <div class="input-group">
+                        <input type="password" class="form-control" placeholder="密码"  name="password">
+                    </div>
+                    <div class="input-group">
+                        <label>记住我
+                         <input type="checkbox" class="checkeme" >
+                        </label>
+                    </div>
+                    <div class="input-group">
+                        <input type="button" class="confirm-btn" value="登陆">
+                    </div>
+
+                </div>
+            </div>
+            <div class="sign-up auth-content">
+                 <div class="icon">
+                    <span class="iconfont">&#xe63a;</span>
+                </div>
+                 <div class="header-group">
+                    <div class="header-content">
+                        <div class="title">注册</div>
+                        <div class="title-b">立即登陆</div>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="请输入手机号" name="telephone">
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="请输入用户名" name="username">
+                    </div>
+                    <div class="input-group">
+                        <div class="short-input">
+                            <input type="text" class="form-control" placeholder="图形验证码" name="username">
+                        </div>
+                        <div class="addon">
+                            <img src="#" alt="">
+                        </div>
+                        <div class="other"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" class="form-control" placeholder="请输入密码" name="pw1">
+                    </div>
+                    <div class="input-group">
+                        <input type="password" class="form-control" placeholder="请确认密码" name="pw2">
+                    </div>
+                    <div class="input-group">
+                        <div class="short-input">
+                            <input type="text" class="form-control" placeholder="请输入短信验证码" name="username">
+                        </div>
+                        <div class="addon">
+                           <span class="msg-capture-img"></span>
+                        </div>
+                        <div class="other"></div>
+                    </div>
+                    <div class="input-group">
+                         <input type="button" class="confirm-btn" value="注册">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
